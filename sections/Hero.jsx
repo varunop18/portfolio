@@ -117,7 +117,7 @@ const Hero = () => {
       id="hero"
       aria-label="Hero"
     >
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-screen">
         <div
           className="pt-20 pb-8 sm:pl-16 pl-6 h-full flex flex-col justify-center"
         >

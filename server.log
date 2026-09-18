@@ -42,3 +42,6 @@ React does not recognize the `willChange` prop on a DOM element. If you intentio
 [browser] React does not recognize the `willChange` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `willchange` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
  GET / 200 in 64ms (next.js: 19ms, application-code: 45ms)
 [browser] React does not recognize the `willChange` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `willchange` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+✓ Compiled in 135ms
+ GET / 200 in 69ms (next.js: 18ms, application-code: 51ms)
+ GET / 200 in 23ms (next.js: 7ms, application-code: 16ms)
