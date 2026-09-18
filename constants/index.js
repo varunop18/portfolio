@@ -117,9 +117,10 @@ export const projects = [
     date: "May 2026 – Aug 2026",
     stack: ["Java", "JavaFX", "SQLite"],
     bullets: [
-      "Built desktop apps with JavaFX GUIs and SQLite persistence for memberships and budgets.",
-      "Implemented add/update/search flows using solid OOP design.",
-      "Added reporting: generate and export monthly financial summaries as PDF.",
+      "Built a Gym Management System handling member registrations, class scheduling, and payment tracking with JavaFX GUI and SQLite database.",
+      "Developed a Personal Expense Tracker for logging daily expenses, categorizing spending, and visualizing budgets with summary reports.",
+      "Implemented add/update/search/delete flows using OOP design patterns with clean MVC architecture.",
+      "Added reporting: generate and export monthly financial summaries and membership reports as PDF.",
     ],
   },
 ];
