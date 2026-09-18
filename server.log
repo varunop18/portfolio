@@ -1,0 +1,38 @@
+▲ Next.js 16.3.4 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.2.149:3001
+✓ Ready in 462ms
+✓ Running next.config.js took 16ms
+
+React does not recognize the `willChange` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `willchange` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+ GET / 200 in 322ms (next.js: 154ms, application-code: 168ms)
+ GET / 200 in 49ms (next.js: 6ms, application-code: 43ms)
+[browser] React does not recognize the `willChange` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `willchange` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+ GET / 200 in 261ms (next.js: 19ms, application-code: 242ms)
+[browser] React does not recognize the `willChange` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `willchange` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+✓ Compiled in 99ms
+ GET / 200 in 82ms (next.js: 30ms, application-code: 52ms)
+ GET / 200 in 24ms (next.js: 8ms, application-code: 16ms)
+✓ Compiled in 36ms
+ GET / 200 in 47ms (next.js: 6ms, application-code: 41ms)
+[browser] React does not recognize the `willChange` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `willchange` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+ GET / 200 in 47ms (next.js: 11ms, application-code: 35ms)
+ GET / 200 in 20ms (next.js: 5ms, application-code: 14ms)
+✓ Compiled in 67ms
+ GET / 200 in 40ms (next.js: 11ms, application-code: 30ms)
+ GET / 200 in 17ms (next.js: 5ms, application-code: 12ms)
+✓ Compiled in 94ms
+✓ Compiled in 46ms
+ GET / 200 in 44ms (next.js: 4ms, application-code: 39ms)
+[browser] React does not recognize the `willChange` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `willchange` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+ GET / 200 in 44ms (next.js: 4ms, application-code: 40ms)
+[browser] React does not recognize the `willChange` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `willchange` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+ GET / 200 in 219ms (next.js: 14ms, application-code: 206ms)
+[browser] React does not recognize the `willChange` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `willchange` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+▲ Next.js 16.3.4 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.2.149:3001
+✓ Ready in 4.6s
+✓ Running next.config.js took 20ms
+

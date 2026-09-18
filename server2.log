@@ -1,0 +1,65 @@
+
+> metaversus@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.4 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.2.149:3001
+✓ Ready in 394ms
+✓ Running next.config.js took 16ms
+
+ GET / 200 in 361ms (next.js: 171ms, application-code: 190ms)
+ GET / 200 in 59ms (next.js: 8ms, application-code: 50ms)
+✓ Compiled in 68ms
+ GET / 200 in 26ms (next.js: 11ms, application-code: 15ms)
+ GET / 200 in 22ms (next.js: 8ms, application-code: 14ms)
+✓ Compiled in 39ms
+ GET / 200 in 21ms (next.js: 8ms, application-code: 14ms)
+✓ Compiled in 58ms
+ GET / 200 in 21ms (next.js: 8ms, application-code: 13ms)
+✓ Compiled in 58ms
+ GET / 200 in 20ms (next.js: 7ms, application-code: 13ms)
+✓ Compiled in 43ms
+ GET / 200 in 21ms (next.js: 7ms, application-code: 13ms)
+ GET / 200 in 22ms (next.js: 8ms, application-code: 15ms)
+✓ Compiled in 55ms
+ GET / 200 in 22ms (next.js: 7ms, application-code: 14ms)
+✓ Compiled in 24ms
+ GET / 200 in 20ms (next.js: 7ms, application-code: 13ms)
+✓ Compiled in 35ms
+ GET / 200 in 24ms (next.js: 12ms, application-code: 13ms)
+✓ Compiled in 28ms
+✓ Compiled in 131ms
+ GET / 200 in 106ms (next.js: 38ms, application-code: 68ms)
+✓ Compiled in 134ms
+ GET / 200 in 201ms (next.js: 103ms, application-code: 98ms)
+✓ Compiled in 184ms
+ GET / 200 in 125ms (next.js: 45ms, application-code: 79ms)
+✓ Compiled in 161ms
+ GET / 200 in 120ms (next.js: 45ms, application-code: 75ms)
+✓ Compiled in 115ms
+ GET / 200 in 75ms (next.js: 8ms, application-code: 67ms)
+ GET / 200 in 23ms (next.js: 8ms, application-code: 15ms)
+ GET / 200 in 55ms (next.js: 5ms, application-code: 51ms)
+ GET / 200 in 25ms (next.js: 10ms, application-code: 15ms)
+✓ Compiled in 52ms
+[browser] Uncaught ReferenceError: github is not defined
+    at ProjectCard (components/NewFeatures.jsx:59:8)
+    at <unknown> (sections/World.jsx:28:11)
+    at Array.map (<anonymous>)
+    at Projects (sections/World.jsx:27:19)
+    at Page (app\page.js:24:7)
+  57 |
+  58 |     <div className="flex gap-4 mt-auto pt-2">
+> 59 |       {github && github !== "#" && (
+     |        ^
+  60 |         <a
+  61 |           href={github}
+  62 |           target="_blank"
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 26ms
+ GET / 200 in 64ms (next.js: 7ms, application-code: 57ms)
+ GET / 200 in 28ms (next.js: 9ms, application-code: 19ms)
+✓ Compiled in 28ms
+ GET / 200 in 23ms (next.js: 7ms, application-code: 16ms)
+✓ Compiled in 44ms
