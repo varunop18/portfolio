@@ -97,31 +97,28 @@ const Hero = () => {
               </a>
             </div>
           </div>
-          <div className="relative w-full md:-mt-[20px] -mt-[12px]">
-            <div className="absolute w-full h-[300px] hero-gradient rounded-tl-[140px] z-0 -top-[30px]" />
-            <div className="w-full sm:h-[400px] h-[280px] rounded-tl-[140px] z-10 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(165,9,255,0.12)] via-[rgba(52,172,199,0.08)] to-[rgba(26,35,46,0.95)]" />
-              <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-10">
-                <div className="w-full max-w-[700px] bg-[rgba(15,20,30,0.85)] rounded-xl border border-[rgba(255,255,255,0.08)] shadow-2xl overflow-hidden backdrop-blur-sm">
-                  <div className="flex items-center gap-2 px-4 py-2.5 bg-[rgba(255,255,255,0.04)] border-b border-[rgba(255,255,255,0.06)]">
-                    <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                    <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                    <span className="w-3 h-3 rounded-full bg-[#28c840]" />
-                    <span className="ml-3 text-[11px] text-[rgba(255,255,255,0.3)] font-mono">varun@dev ~ </span>
-                  </div>
-                  <div className="p-4 sm:p-5 font-mono text-[12px] sm:text-[13px] leading-[22px] sm:leading-[24px]">
-                    <p><span className="text-[#c792ea]">const</span> <span className="text-[#82aaff]">developer</span> <span className="text-[#89ddff]">=</span> <span className="text-[#89ddff]">{`{`}</span></p>
-                    <p className="pl-4"><span className="text-[#c3e88d]">name</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Varun Rathod&quot;</span><span className="text-[#89ddff]">,</span></p>
-                    <p className="pl-4"><span className="text-[#c3e88d]">role</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Full-Stack Developer&quot;</span><span className="text-[#89ddff]">,</span></p>
-                    <p className="pl-4"><span className="text-[#c3e88d]">stack</span><span className="text-[#89ddff]">:</span> <span className="text-[#89ddff]">[</span></p>
-                    <p className="pl-8"><span className="text-[#c3e88d]">&quot;React&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Node.js&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Python&quot;</span><span className="text-[#89ddff]">,</span></p>
-                    <p className="pl-8"><span className="text-[#c3e88d]">&quot;Java&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Django&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;PostgreSQL&quot;</span></p>
-                    <p className="pl-4"><span className="text-[#89ddff]">]</span><span className="text-[#89ddff]">,</span></p>
-                    <p className="pl-4"><span className="text-[#c3e88d]">status</span><span className="text-[#89ddff]">:</span> <span className="text-[#ffcb6b]">&quot;Open to opportunities&quot;</span></p>
-                    <p><span className="text-[#89ddff]">{`}`}</span><span className="text-[#89ddff]">;</span></p>
-                    <p className="mt-2"><span className="text-[#546e7a]">{"// Let's build something great together"}</span></p>
-                    <p className="mt-1"><span className="text-[#c792ea]">export default</span> <span className="text-[#82aaff]">developer</span><span className="text-[#89ddff]">;</span></p>
-                  </div>
+          <div className="relative w-full mt-6">
+            <div className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[100px]" />
+            <div className="w-full z-10 relative flex justify-center px-4">
+              <div className="w-full max-w-[650px] bg-[rgba(12,17,27,0.9)] rounded-xl border border-[rgba(255,255,255,0.07)] shadow-[0_8px_40px_rgba(0,0,0,0.4)] overflow-hidden backdrop-blur-md">
+                <div className="flex items-center gap-2 px-4 py-2 bg-[rgba(255,255,255,0.03)] border-b border-[rgba(255,255,255,0.06)]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                  <span className="ml-3 text-[11px] text-[rgba(255,255,255,0.25)] font-mono">varun@dev ~ </span>
+                </div>
+                <div className="p-4 sm:p-5 font-mono text-[11px] sm:text-[12px] leading-[20px] sm:leading-[22px]">
+                  <p><span className="text-[#c792ea]">const</span> <span className="text-[#82aaff]">developer</span> <span className="text-[#89ddff]">=</span> <span className="text-[#89ddff]">{`{`}</span></p>
+                  <p className="pl-4"><span className="text-[#c3e88d]">name</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Varun Rathod&quot;</span><span className="text-[#89ddff]">,</span></p>
+                  <p className="pl-4"><span className="text-[#c3e88d]">role</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Full-Stack Developer&quot;</span><span className="text-[#89ddff]">,</span></p>
+                  <p className="pl-4"><span className="text-[#c3e88d]">stack</span><span className="text-[#89ddff]">:</span> <span className="text-[#89ddff]">[</span></p>
+                  <p className="pl-8"><span className="text-[#c3e88d]">&quot;React&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Node.js&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Python&quot;</span><span className="text-[#89ddff]">,</span></p>
+                  <p className="pl-8"><span className="text-[#c3e88d]">&quot;Java&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Django&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;PostgreSQL&quot;</span></p>
+                  <p className="pl-4"><span className="text-[#89ddff]">]</span><span className="text-[#89ddff]">,</span></p>
+                  <p className="pl-4"><span className="text-[#c3e88d]">status</span><span className="text-[#89ddff]">:</span> <span className="text-[#ffcb6b]">&quot;Open to opportunities&quot;</span></p>
+                  <p><span className="text-[#89ddff]">{`}`}</span><span className="text-[#89ddff]">;</span></p>
+                  <p className="mt-2"><span className="text-[#546e7a]">{"// Let's build something great together"}</span></p>
+                  <p className="mt-1"><span className="text-[#c792ea]">export default</span> <span className="text-[#82aaff]">developer</span><span className="text-[#89ddff]">;</span></p>
                 </div>
               </div>
             </div>
@@ -134,7 +131,7 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative h-[180vh]"
+      className="relative h-[120vh] sm:h-[180vh]"
       id="hero"
       aria-label="Hero"
     >
@@ -150,9 +147,9 @@ const Hero = () => {
                 y: nameY,
                 scale: nameScale,
                 opacity: nameOpacity,
+                willChange: "transform",
               }}
               className="flex justify-center items-center flex-col relative z-10"
-              willChange="transform"
             >
               <h1 className={styles.heroHeading}>VARUN</h1>
               <h1 className={styles.heroHeading}>RATHOD</h1>
@@ -209,42 +206,39 @@ const Hero = () => {
                 y: visualY,
                 scale: visualScale,
                 opacity: visualOpacity,
+                willChange: "transform",
               }}
-              className="relative w-full md:-mt-[20px] -mt-[12px]"
-              willChange="transform"
+              className="relative w-full mt-6"
             >
               <motion.div
                 style={{
                   opacity: gradientOpacity,
                   x: gradientX,
                   y: gradientY,
+                  willChange: "transform",
                 }}
-                className="absolute w-full h-[300px] hero-gradient rounded-tl-[140px] z-0 -top-[30px]"
-                willChange="transform"
+                className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[100px]"
               />
-              <div className="w-full sm:h-[400px] h-[280px] rounded-tl-[140px] z-10 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(165,9,255,0.12)] via-[rgba(52,172,199,0.08)] to-[rgba(26,35,46,0.95)]" />
-                <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-10">
-                  <div className="w-full max-w-[700px] bg-[rgba(15,20,30,0.85)] rounded-xl border border-[rgba(255,255,255,0.08)] shadow-2xl overflow-hidden backdrop-blur-sm">
-                    <div className="flex items-center gap-2 px-4 py-2.5 bg-[rgba(255,255,255,0.04)] border-b border-[rgba(255,255,255,0.06)]">
-                      <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                      <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                      <span className="w-3 h-3 rounded-full bg-[#28c840]" />
-                      <span className="ml-3 text-[11px] text-[rgba(255,255,255,0.3)] font-mono">varun@dev ~ </span>
-                    </div>
-                    <div className="p-4 sm:p-5 font-mono text-[12px] sm:text-[13px] leading-[22px] sm:leading-[24px]">
-                      <p><span className="text-[#c792ea]">const</span> <span className="text-[#82aaff]">developer</span> <span className="text-[#89ddff]">=</span> <span className="text-[#89ddff]">{`{`}</span></p>
-                      <p className="pl-4"><span className="text-[#c3e88d]">name</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Varun Rathod&quot;</span><span className="text-[#89ddff]">,</span></p>
-                      <p className="pl-4"><span className="text-[#c3e88d]">role</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Full-Stack Developer&quot;</span><span className="text-[#89ddff]">,</span></p>
-                      <p className="pl-4"><span className="text-[#c3e88d]">stack</span><span className="text-[#89ddff]">:</span> <span className="text-[#89ddff]">[</span></p>
-                      <p className="pl-8"><span className="text-[#c3e88d]">&quot;React&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Node.js&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Python&quot;</span><span className="text-[#89ddff]">,</span></p>
-                      <p className="pl-8"><span className="text-[#c3e88d]">&quot;Java&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Django&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;PostgreSQL&quot;</span></p>
-                      <p className="pl-4"><span className="text-[#89ddff]">]</span><span className="text-[#89ddff]">,</span></p>
-                      <p className="pl-4"><span className="text-[#c3e88d]">status</span><span className="text-[#89ddff]">:</span> <span className="text-[#ffcb6b]">&quot;Open to opportunities&quot;</span></p>
-                      <p><span className="text-[#89ddff]">{`}`}</span><span className="text-[#89ddff]">;</span></p>
-                      <p className="mt-2"><span className="text-[#546e7a]">// Let&apos;s build something great together</span></p>
-                      <p className="mt-1"><span className="text-[#c792ea]">export default</span> <span className="text-[#82aaff]">developer</span><span className="text-[#89ddff]">;</span><span className="inline-block w-[7px] h-[15px] bg-[#82aaff] ml-1 animate-pulse" /></p>
-                    </div>
+              <div className="w-full z-10 relative flex justify-center px-4">
+                <div className="w-full max-w-[650px] bg-[rgba(12,17,27,0.9)] rounded-xl border border-[rgba(255,255,255,0.07)] shadow-[0_8px_40px_rgba(0,0,0,0.4)] overflow-hidden backdrop-blur-md">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-[rgba(255,255,255,0.03)] border-b border-[rgba(255,255,255,0.06)]">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                    <span className="ml-3 text-[11px] text-[rgba(255,255,255,0.25)] font-mono">varun@dev ~ </span>
+                  </div>
+                  <div className="p-4 sm:p-5 font-mono text-[11px] sm:text-[12px] leading-[20px] sm:leading-[22px]">
+                    <p><span className="text-[#c792ea]">const</span> <span className="text-[#82aaff]">developer</span> <span className="text-[#89ddff]">=</span> <span className="text-[#89ddff]">{`{`}</span></p>
+                    <p className="pl-4"><span className="text-[#c3e88d]">name</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Varun Rathod&quot;</span><span className="text-[#89ddff]">,</span></p>
+                    <p className="pl-4"><span className="text-[#c3e88d]">role</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Full-Stack Developer&quot;</span><span className="text-[#89ddff]">,</span></p>
+                    <p className="pl-4"><span className="text-[#c3e88d]">stack</span><span className="text-[#89ddff]">:</span> <span className="text-[#89ddff]">[</span></p>
+                    <p className="pl-8"><span className="text-[#c3e88d]">&quot;React&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Node.js&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Python&quot;</span><span className="text-[#89ddff]">,</span></p>
+                    <p className="pl-8"><span className="text-[#c3e88d]">&quot;Java&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Django&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;PostgreSQL&quot;</span></p>
+                    <p className="pl-4"><span className="text-[#89ddff]">]</span><span className="text-[#89ddff]">,</span></p>
+                    <p className="pl-4"><span className="text-[#c3e88d]">status</span><span className="text-[#89ddff]">:</span> <span className="text-[#ffcb6b]">&quot;Open to opportunities&quot;</span></p>
+                    <p><span className="text-[#89ddff]">{`}`}</span><span className="text-[#89ddff]">;</span></p>
+                    <p className="mt-2"><span className="text-[#546e7a]">{"// Let's build something great together"}</span></p>
+                    <p className="mt-1"><span className="text-[#c792ea]">export default</span> <span className="text-[#82aaff]">developer</span><span className="text-[#89ddff]">;</span><span className="inline-block w-[6px] h-[14px] bg-[#82aaff] ml-1 animate-pulse" /></p>
                   </div>
                 </div>
               </div>

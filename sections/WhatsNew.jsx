@@ -26,13 +26,12 @@ const ProjectCard = ({ project, index }) => {
   return (
     <motion.div
       ref={ref}
-      style={{ y, opacity, scale, filter: blur }}
+      style={{ y, opacity, scale, filter: blur, willChange: "transform" }}
       whileHover={{
         y: -6,
         transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] },
       }}
       className="card-glow flex flex-col p-6 sm:p-8 rounded-[32px] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] gap-4 hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.07)] transition-all duration-500"
-      willChange="transform"
     >
       <div>
         <h3 className="font-bold text-[22px] sm:text-[28px] text-white leading-tight">
