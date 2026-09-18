@@ -254,9 +254,20 @@ html.lenis body {
     -webkit-tap-highlight-color: transparent;
   }
 
+  .gradient-02,
   .gradient-03,
-  .gradient-04 {
-    filter: blur(120px) !important;
+  .gradient-04,
+  .footer-gradient,
+  .feedback-gradient {
+    display: none !important;
+  }
+
+  .hero-gradient {
+    filter: blur(60px) !important;
     opacity: 0.5 !important;
+  }
+
+  .glossy-btn::after {
+    display: none;
   }
 }

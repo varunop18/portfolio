@@ -4214,3 +4214,6 @@ https://react.dev/link/hydration-mismatch
  GET / 200 in 48ms (next.js: 6ms, application-code: 42ms)
  GET / 200 in 28ms (next.js: 6ms, application-code: 22ms)
 ✓ Compiled in 59ms
+ GET / 200 in 57ms (next.js: 5ms, application-code: 53ms)
+✓ Compiled in 133ms
+✓ Compiled in 62ms
