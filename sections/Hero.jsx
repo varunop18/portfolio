@@ -65,7 +65,7 @@ const Hero = () => {
   if (prefersReduced) {
     return (
       <section
-        className="sm:pl-16 pl-6 pt-20 pb-12"
+        className="sm:pl-16 pl-6 pt-28 pb-12"
         id="hero"
         aria-label="Hero"
       >
@@ -119,7 +119,7 @@ const Hero = () => {
     >
       <div className="sticky top-0 h-screen">
         <div
-          className="pt-20 pb-8 sm:pl-16 pl-6 h-full flex flex-col justify-center"
+          className="pt-28 pb-8 sm:pl-16 pl-6 h-full flex flex-col justify-center"
         >
           <div
             className={`${styles.innerWidth} mx-auto flex flex-col relative`}

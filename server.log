@@ -45,3 +45,9 @@ React does not recognize the `willChange` prop on a DOM element. If you intentio
 ✓ Compiled in 135ms
  GET / 200 in 69ms (next.js: 18ms, application-code: 51ms)
  GET / 200 in 23ms (next.js: 7ms, application-code: 16ms)
+ GET / 200 in 44ms (next.js: 9ms, application-code: 35ms)
+ GET / 200 in 21ms (next.js: 5ms, application-code: 16ms)
+✓ Compiled in 49ms
+ GET / 200 in 42ms (next.js: 10ms, application-code: 33ms)
+ GET / 200 in 19ms (next.js: 5ms, application-code: 14ms)
+✓ Compiled in 73ms
