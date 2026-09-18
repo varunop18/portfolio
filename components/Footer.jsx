@@ -17,7 +17,7 @@ const Footer = () => (
     <div className="footer-gradient" />
 
     <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
-      <div className="flex items-center justify-between flex-wrap gap-5">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
         <div>
           <h4 className="font-bold text-[32px] sm:text-[40px] md:text-[48px] text-white">
             Let&apos;s Talk
@@ -43,7 +43,7 @@ const Footer = () => (
       <div className="flex flex-col">
         <div className="mb-[50px] h-[2px] bg-white opacity-10" />
 
-        <div className="flex items-center justify-between flex-wrap gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <h4 className="font-extrabold text-[20px] sm:text-[24px] text-white">
             {profile.name}
           </h4>

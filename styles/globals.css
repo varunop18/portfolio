@@ -237,3 +237,26 @@ html.lenis body {
   will-change: transform;
   backface-visibility: hidden;
 }
+
+@media (max-width: 767px) {
+  html {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  body {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .gradient-03,
+  .gradient-04 {
+    filter: blur(120px) !important;
+    opacity: 0.5 !important;
+  }
+}

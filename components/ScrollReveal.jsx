@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const ScrollReveal = ({
@@ -12,62 +12,47 @@ const ScrollReveal = ({
   className = "",
 }) => {
   const ref = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 0.9", "start 0.3"],
   });
 
-  const getTransforms = () => {
+  const transforms = (() => {
     switch (direction) {
       case "up":
         return {
           y: useTransform(scrollYProgress, [0, 1], [distance, 0]),
           opacity: useTransform(scrollYProgress, [0, 1], [0, 1]),
-          filter: useTransform(
-            scrollYProgress,
-            [0, 1],
-            ["blur(4px)", "blur(0px)"]
-          ),
         };
       case "down":
         return {
           y: useTransform(scrollYProgress, [0, 1], [-distance, 0]),
           opacity: useTransform(scrollYProgress, [0, 1], [0, 1]),
-          filter: useTransform(
-            scrollYProgress,
-            [0, 1],
-            ["blur(4px)", "blur(0px)"]
-          ),
         };
       case "left":
         return {
           x: useTransform(scrollYProgress, [0, 1], [distance, 0]),
           opacity: useTransform(scrollYProgress, [0, 1], [0, 1]),
-          filter: useTransform(
-            scrollYProgress,
-            [0, 1],
-            ["blur(4px)", "blur(0px)"]
-          ),
         };
       case "right":
         return {
           x: useTransform(scrollYProgress, [0, 1], [-distance, 0]),
           opacity: useTransform(scrollYProgress, [0, 1], [0, 1]),
-          filter: useTransform(
-            scrollYProgress,
-            [0, 1],
-            ["blur(4px)", "blur(0px)"]
-          ),
         };
       case "scale":
         return {
           scale: useTransform(scrollYProgress, [0, 1], [0.9, 1]),
           opacity: useTransform(scrollYProgress, [0, 1], [0, 1]),
-          filter: useTransform(
-            scrollYProgress,
-            [0, 1],
-            ["blur(4px)", "blur(0px)"]
-          ),
         };
       default:
         return {
@@ -75,15 +60,12 @@ const ScrollReveal = ({
           opacity: useTransform(scrollYProgress, [0, 1], [0, 1]),
         };
     }
-  };
-
-  const transforms = getTransforms();
+  })();
 
   return (
     <motion.div
       ref={ref}
-      style={transforms}
-      transition={{ delay, duration }}
+      style={isMobile ? {} : transforms}
       className={className}
     >
       {children}
