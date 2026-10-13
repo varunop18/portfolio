@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import styles from "../styles";
@@ -50,58 +50,78 @@ const particleData = [
   { w: 1.6, h: 2.1, t: 58, l: 48, dur: 2.7, del: 1.3 },
 ];
 
-const Particles = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    {particleData.map((p, i) => (
-      <span
-        key={i}
-        className="absolute rounded-full bg-white/30"
-        style={{
-          width: `${p.w}px`,
-          height: `${p.h}px`,
-          top: `${p.t}%`,
-          left: `${p.l}%`,
-          animation: `pulse ${p.dur}s ease-in-out infinite`,
-          animationDelay: `${p.del}s`,
-        }}
-      />
-    ))}
-  </div>
-);
+const Particles = ({ isActive }) => {
+  if (!isActive) return null;
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {particleData.map((p, i) => (
+        <span
+          key={i}
+          className="absolute rounded-full bg-white/30"
+          style={{
+            width: `${p.w}px`,
+            height: `${p.h}px`,
+            top: `${p.t}%`,
+            left: `${p.l}%`,
+            animation: `pulse ${p.dur}s ease-in-out infinite`,
+            animationDelay: `${p.del}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
-const LightBeam = ({ glow }) => (
-  <div
-    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[180px] pointer-events-none z-0"
-    style={{
-      background: `radial-gradient(ellipse at center bottom, ${glow}55 0%, ${glow}20 30%, transparent 70%)`,
-    }}
-  />
-);
+const LightBeam = ({ glow, isActive }) => {
+  if (!isActive) return null;
+  return (
+    <div
+      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[180px] pointer-events-none z-0"
+      style={{
+        background: `radial-gradient(ellipse at center bottom, ${glow}55 0%, ${glow}20 30%, transparent 70%)`,
+      }}
+    />
+  );
+};
 
-const DesktopCard = ({ project, index, isActive, onHover }) => {
+const DesktopCard = ({ project, index, isActive, onActivate, onKeyDown }) => {
   const style = cardStyles[index % cardStyles.length];
+  const cardRef = useRef(null);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onActivate(index);
+    }
+  };
+
+  const handleFocus = () => onActivate(index);
 
   return (
     <motion.div
+      ref={cardRef}
       layout
-      onHoverStart={() => onHover(index)}
-      onMouseLeave={() => onHover(null)}
       animate={{
-        flex: isActive ? "1 1 420px" : "1 1 80px",
+        width: isActive ? "420px" : "80px",
       }}
       transition={{ type: "spring", stiffness: 180, damping: 22 }}
-      className={`relative rounded-[20px] overflow-hidden cursor-pointer ${
-        isActive ? "min-w-[340px]" : "min-w-[80px]"
-      }`}
-      style={{ minHeight: "440px" }}
+      className={`relative rounded-[20px] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black ${isActive ? "w-[420px]" : "w-[80px]"}`}
+      style={{ minHeight: "440px", flexShrink: 0 }}
+      tabIndex={0}
+      role="button"
+      aria-label={`View ${project.title.split("—")[0].split("–")[0].trim()} details`}
+      aria-expanded={isActive}
+      onKeyDown={handleKeyDown}
+      onFocus={handleFocus}
+      onMouseEnter={() => onActivate(index)}
     >
-      <div className="absolute inset-0" style={{ background: style.bg }} />
-      <div className="absolute inset-0" style={{ background: style.overlay }} />
+      <div className="absolute inset-0 rounded-[20px]" style={{ background: style.bg }} />
+      <div className="absolute inset-0 rounded-[20px]" style={{ background: style.overlay }} />
 
-      {style.particles && <Particles />}
-      {isActive && <LightBeam glow={style.glow} />}
+      <Particles isActive={isActive && style.particles} />
+      <LightBeam glow={style.glow} isActive={isActive} />
 
-      <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+      <div className="absolute inset-0 rounded-[20px] opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{
           background: `radial-gradient(circle at 50% 80%, ${style.glow}30 0%, transparent 60%)`,
         }}
@@ -161,6 +181,7 @@ const DesktopCard = ({ project, index, isActive, onHover }) => {
               <span
                 className="font-bold text-[14px] sm:text-[15px] text-white/90 whitespace-nowrap"
                 style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
+                aria-hidden="true"
               >
                 {project.title.split("—")[0].split("–")[0].trim()}
               </span>
@@ -185,18 +206,25 @@ const MobileCard = ({ project, index }) => {
   const [expanded, setExpanded] = useState(false);
   const style = cardStyles[index % cardStyles.length];
 
+  const toggleExpanded = () => setExpanded((prev) => !prev);
+
   return (
     <motion.div
       variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { delay: index * 0.1, duration: 0.6 } } }}
       layout
-      onClick={() => setExpanded(!expanded)}
-      className="relative rounded-[20px] overflow-hidden"
+      onClick={toggleExpanded}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleExpanded(); } }}
+      tabIndex={0}
+      role="button"
+      aria-label={`${expanded ? "Collapse" : "Expand"} ${project.title.split("—")[0].split("–")[0].trim()}`}
+      aria-expanded={expanded}
+      className="relative rounded-[20px] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black"
       style={{ minHeight: expanded ? "auto" : "240px" }}
     >
-      <div className="absolute inset-0" style={{ background: style.bg }} />
-      <div className="absolute inset-0" style={{ background: style.overlay }} />
-      {style.particles && <Particles />}
-      {expanded && <LightBeam glow={style.glow} />}
+      <div className="absolute inset-0 rounded-[20px]" style={{ background: style.bg }} />
+      <div className="absolute inset-0 rounded-[20px]" style={{ background: style.overlay }} />
+      <Particles isActive={style.particles} />
+      <LightBeam glow={style.glow} isActive={expanded} />
 
       <motion.div layout="position" className="relative z-10 p-5 flex flex-col gap-2">
         <p className="font-normal text-[10px] uppercase tracking-[2px] text-white/50">
@@ -266,6 +294,19 @@ const MobileCard = ({ project, index }) => {
 
 const Projects = () => {
   const [activeIndex, setActiveIndex] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    setIsMobile(mq.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const handleActivate = useCallback((index) => {
+    setActiveIndex(index);
+  }, []);
 
   return (
     <section className={`${styles.paddings} relative z-10`} aria-label="All Projects">
@@ -277,24 +318,21 @@ const Projects = () => {
         className={`${styles.innerWidth} mx-auto flex flex-col`}
       >
         <TypingText title="| All Projects" textStyles="text-center" />
-        <TitleText
-          title={<>Projects I&apos;ve Built</>}
-          textStyles="text-center"
-        />
+        <TitleText title={<>Projects I&apos;ve Built</>} textStyles="text-center" />
 
-        <div className="mt-[50px] hidden md:flex gap-3 justify-center px-2">
+        <div className="mt-[50px] hidden lg:flex gap-3 justify-center px-2" role="tablist" aria-label="Project cards">
           {projects.map((project, i) => (
             <DesktopCard
               key={project.id}
               project={project}
               index={i}
               isActive={activeIndex === i}
-              onHover={setActiveIndex}
+              onActivate={handleActivate}
             />
           ))}
         </div>
 
-        <div className="mt-[30px] grid grid-cols-1 sm:grid-cols-2 gap-3 px-2 md:hidden">
+        <div className="mt-[30px] grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 lg:hidden">
           {projects.map((project, i) => (
             <MobileCard key={project.id} project={project} index={i} />
           ))}

@@ -13,15 +13,18 @@
 }
 
 html {
-  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
+  scroll-padding-top: 80px;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -41,6 +44,11 @@ button:hover {
   transform: translateY(-1px);
 }
 
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
 .gradient-01 {
   background-image: linear-gradient(
     270deg,
@@ -52,7 +60,7 @@ button:hover {
     hsl(221deg 73% 70%) 74%,
     hsl(220deg 76% 51%) 100%
   );
-  filter: blur(125px);
+  filter: blur(80px);
   will-change: opacity;
 }
 
@@ -72,7 +80,7 @@ button:hover {
   top: 0px;
   right: 0px;
   background: #7aebfb;
-  filter: blur(190px);
+  filter: blur(120px);
   will-change: opacity;
   animation: gradientFloat 6s ease-in-out infinite;
 }
@@ -97,7 +105,7 @@ button:hover {
   left: 20%;
   top: 5%;
   background: rgba(149, 66, 232, 0.35);
-  filter: blur(175px);
+  filter: blur(100px);
   transform: rotate(-114.2deg);
   will-change: opacity;
   animation: gradientPulse 8s ease-in-out infinite;
@@ -115,7 +123,7 @@ button:hover {
   left: 30%;
   top: 10%;
   background: rgba(45, 72, 152, 0.75);
-  filter: blur(200px);
+  filter: blur(120px);
   transform: rotate(-53.13deg);
   will-change: opacity;
   animation: gradientPulse 8s ease-in-out infinite;
@@ -137,7 +145,7 @@ button:hover {
   left: 0px;
   top: 0px;
   background: #8d39a3;
-  filter: blur(175px);
+  filter: blur(100px);
 }
 
 .footer-gradient {
@@ -147,7 +155,7 @@ button:hover {
   left: 37%;
   bottom: 0;
   background: #65c4fa;
-  filter: blur(150px);
+  filter: blur(100px);
 }
 
 .card-glow {
@@ -209,28 +217,19 @@ button:hover {
     scroll-behavior: auto !important;
   }
 
+  .gradient-01,
   .gradient-02,
   .gradient-03,
-  .gradient-04 {
-    animation: none;
+  .gradient-04,
+  .feedback-gradient,
+  .footer-gradient {
+    animation: none !important;
+    filter: none !important;
   }
-}
 
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
+  .hero-gradient {
+    filter: none !important;
+  }
 }
 
 .parallax-layer {
@@ -240,13 +239,10 @@ html.lenis body {
 
 @media (max-width: 767px) {
   html {
-    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
   }
 
   body {
-    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -254,6 +250,7 @@ html.lenis body {
     -webkit-tap-highlight-color: transparent;
   }
 
+  .gradient-01,
   .gradient-02,
   .gradient-03,
   .gradient-04,
@@ -263,11 +260,26 @@ html.lenis body {
   }
 
   .hero-gradient {
-    filter: blur(60px) !important;
-    opacity: 0.5 !important;
+    filter: blur(40px) !important;
+    opacity: 0.4 !important;
   }
 
   .glossy-btn::after {
     display: none;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
   }
 }

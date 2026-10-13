@@ -11,7 +11,7 @@ const Footer = () => (
     variants={footerVariants}
     initial="hidden"
     whileInView="show"
-    className={`${styles.paddings} py-8 relative`}
+    className={`${styles.paddings} py-8 relative safe-area-bottom`}
     aria-label="Footer"
   >
     <div className="footer-gradient" />
@@ -19,22 +19,22 @@ const Footer = () => (
     <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
         <div>
-          <h4 className="font-bold text-[32px] sm:text-[40px] md:text-[48px] text-white">
+          <h4 className="font-bold text-[clamp(28px,4vw,48px)] text-white">
             Let&apos;s Talk
           </h4>
-          <p className="mt-2 font-normal text-[14px] sm:text-[16px] text-secondary-white">
-            <a href={`mailto:${profile.email}`} className="hover:text-white transition-colors">{profile.email}</a>
+          <p className="mt-2 font-normal text-[clamp(14px,2vw,16px)] text-secondary-white">
+            <a href={`mailto:${profile.email}`} className="hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black rounded">{profile.email}</a>
           </p>
-          <p className="mt-1 font-normal text-[14px] sm:text-[16px] text-secondary-white">
-            <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="hover:text-white transition-colors">{profile.phone}</a> · {profile.location}
+          <p className="mt-1 font-normal text-[clamp(14px,2vw,16px)] text-secondary-white">
+            <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black rounded">{profile.phone}</a> · {profile.location}
           </p>
         </div>
 
         <a
           href={`mailto:${profile.email}`}
-          className="glossy-btn flex items-center h-fit py-3 sm:py-4 px-5 sm:px-6 bg-[#25618b] rounded-[32px] gap-[12px] hover:bg-[#2d73a3] hover:shadow-[0_0_20px_rgba(37,97,139,0.4)] transition-all duration-400"
+          className="glossy-btn flex items-center h-fit py-3 sm:py-4 px-5 sm:px-6 bg-[#25618b] rounded-[32px] gap-[12px] hover:bg-[#2d73a3] hover:shadow-[0_0_20px_rgba(37,97,139,0.4)] transition-all duration-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black min-h-[44px]"
         >
-          <span className="font-normal text-[14px] sm:text-[16px] text-white">
+          <span className="font-normal text-[clamp(14px,2vw,16px)] text-white">
             Send Email
           </span>
         </a>
@@ -44,10 +44,10 @@ const Footer = () => (
         <div className="mb-[50px] h-[2px] bg-white opacity-10" />
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <h4 className="font-extrabold text-[20px] sm:text-[24px] text-white">
+          <h4 className="font-extrabold text-[clamp(18px,2.5vw,24px)] text-white">
             {profile.name}
           </h4>
-          <p className="font-normal text-[12px] sm:text-[14px] text-white opacity-50">
+          <p className="font-normal text-[clamp(12px,1.5vw,14px)] text-white opacity-50">
             &copy; {new Date().getFullYear()} {profile.name}. All Rights
             Reserved.
           </p>
@@ -59,11 +59,12 @@ const Footer = () => (
                 href={social.url}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="hover:opacity-80 transition-opacity"
+                className="hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black rounded p-1 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                aria-label={social.name}
               >
                 <img
                   src={social.icon}
-                  alt={social.name}
+                  alt=""
                   title={social.name}
                   className="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] object-contain cursor-pointer"
                 />

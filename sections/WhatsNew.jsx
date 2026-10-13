@@ -1,14 +1,9 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
+import { motion } from "framer-motion";
 
 import styles from "../styles";
+import { staggerContainer } from "../utils/motion";
 import { TitleText, TypingText } from "../components";
 import { projects } from "../constants";
 
@@ -26,35 +21,18 @@ const featuredStyles = [
 ];
 
 const ProjectCard = ({ project, index }) => {
-  const ref = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
   const style = featuredStyles[index % featuredStyles.length];
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
-    const handler = (e) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.95", "start 0.4"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [80, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
 
   return (
     <motion.div
-      ref={ref}
-      style={isMobile ? { opacity } : { y, opacity, scale }}
-      whileHover={!isMobile ? {
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+      whileHover={{
         y: -8,
         transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] },
-      } : undefined}
+      }}
       className="relative rounded-[28px] overflow-hidden group"
     >
       <div className="absolute inset-0" style={{ background: style.gradient }} />
@@ -137,30 +115,18 @@ const ProjectCard = ({ project, index }) => {
 
 const FeaturedProjects = () => {
   const featured = projects.filter((p) => p.featured);
-  const sectionRef = useRef(null);
-  const { scrollYProgress: titleProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 0.8", "start 0.4"],
-  });
-  const titleY = useTransform(titleProgress, [0, 1], [40, 0]);
-  const titleOpacity = useTransform(titleProgress, [0, 1], [0, 1]);
 
   return (
-    <section
-      ref={sectionRef}
-      className={`${styles.paddings} relative z-10`}
-      id="projects"
-      aria-label="Featured Projects"
-    >
+    <section className={`${styles.paddings} relative z-10`} id="projects" aria-label="Featured Projects">
       <motion.div
-        style={{ y: titleY, opacity: titleOpacity }}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.25 }}
+        variants={staggerContainer}
         className={`${styles.innerWidth} mx-auto flex flex-col`}
       >
         <TypingText title="| Featured Projects" textStyles="text-center" />
-        <TitleText
-          title={<>Projects I&apos;m Proud Of</>}
-          textStyles="text-center"
-        />
+        <TitleText title={<>Projects I&apos;m Proud Of</>} textStyles="text-center" />
         <div className="mt-[50px] grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {featured.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />

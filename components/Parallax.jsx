@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 
-const Parallax = ({ children, speed = 0.5, className = "" }) => {
+const Parallax = ({ children, speed = 0.3, className = "" }) => {
   const ref = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -15,21 +14,47 @@ const Parallax = ({ children, speed = 0.5, className = "" }) => {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
+  // Desktop: use a simple scroll-based transform via requestAnimationFrame
+  useEffect(() => {
+    if (isMobile || !ref.current) return;
+    
+    let ticking = false;
+    const element = ref.current;
+    
+    const updatePosition = () => {
+      const rect = element.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const elementHeight = rect.height;
+      
+      // Calculate how far the element has scrolled into/out of view
+      const progress = Math.max(0, Math.min(1, 1 - rect.top / (viewportHeight + elementHeight)));
+      
+      // Apply transform
+      const offset = speed * 50 * (progress * 2 - 1); // -50 to 50 * speed
+      element.style.transform = `translateY(${offset}px)`;
+      ticking = false;
+    };
 
-  const y = useTransform(scrollYProgress, [0, 1], [speed * -100, speed * 100]);
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updatePosition);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updatePosition(); // Initial position
+    
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      element.style.transform = "";
+    };
+  }, [speed, isMobile]);
 
   return (
-    <motion.div
-      ref={ref}
-      style={isMobile ? {} : { y }}
-      className={className}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 

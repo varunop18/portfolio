@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -22,13 +22,13 @@ const CodeTerminal = () => (
       </div>
       <div className="p-4 sm:p-5 font-mono text-[11px] sm:text-[12px] leading-[20px] sm:leading-[22px]">
         <p><span className="text-[#c792ea]">const</span> <span className="text-[#82aaff]">developer</span> <span className="text-[#89ddff]">=</span> <span className="text-[#89ddff]">{`{`}</span></p>
-        <p className="pl-4"><span className="text-[#c3e88d]">name</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Varun Rathod&quot;</span><span className="text-[#89ddff]">,</span></p>
-        <p className="pl-4"><span className="text-[#c3e88d]">role</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">&quot;Full-Stack Developer&quot;</span><span className="text-[#89ddff]">,</span></p>
+        <p className="pl-4"><span className="text-[#c3e88d]">name</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">"Varun Rathod"</span><span className="text-[#89ddff]">,</span></p>
+        <p className="pl-4"><span className="text-[#c3e88d]">role</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">"Full-Stack Developer"</span><span className="text-[#89ddff]">,</span></p>
         <p className="pl-4"><span className="text-[#c3e88d]">stack</span><span className="text-[#89ddff]">:</span> <span className="text-[#89ddff]">[</span></p>
-        <p className="pl-8"><span className="text-[#c3e88d]">&quot;React&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Node.js&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Python&quot;</span><span className="text-[#89ddff]">,</span></p>
-        <p className="pl-8"><span className="text-[#c3e88d]">&quot;Java&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;Django&quot;</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">&quot;PostgreSQL&quot;</span></p>
+        <p className="pl-8"><span className="text-[#c3e88d]">"React"</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">"Node.js"</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">"Python"</span><span className="text-[#89ddff]">,</span></p>
+        <p className="pl-8"><span className="text-[#c3e88d]">"Java"</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">"Django"</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">"PostgreSQL"</span></p>
         <p className="pl-4"><span className="text-[#89ddff]">]</span><span className="text-[#89ddff]">,</span></p>
-        <p className="pl-4"><span className="text-[#c3e88d]">status</span><span className="text-[#89ddff]">:</span> <span className="text-[#ffcb6b]">&quot;Open to opportunities&quot;</span></p>
+        <p className="pl-4"><span className="text-[#c3e88d]">status</span><span className="text-[#89ddff]">:</span> <span className="text-[#ffcb6b]">"Open to opportunities"</span></p>
         <p><span className="text-[#89ddff]">{`}`}</span><span className="text-[#89ddff]">;</span></p>
         <p className="mt-2"><span className="text-[#546e7a]">{"// Let's build something great together"}</span></p>
         <p className="mt-1"><span className="text-[#c792ea]">export default</span> <span className="text-[#82aaff]">developer</span><span className="text-[#89ddff]">;</span><span className="inline-block w-[6px] h-[14px] bg-[#82aaff] ml-1 animate-pulse" /></p>
@@ -37,11 +37,10 @@ const CodeTerminal = () => (
   </div>
 );
 
-const HeroButtons = ({ onNavClick }) => (
+const HeroButtons = () => (
   <div className="mt-8 flex gap-3 sm:gap-4 flex-wrap justify-center px-4 relative z-10">
     <a
       href="#projects"
-      onClick={(e) => onNavClick(e, "#projects")}
       className="glossy-btn py-3 sm:py-4 px-6 sm:px-8 bg-[#25618b] rounded-[32px] font-normal text-[14px] sm:text-[16px] text-white hover:bg-[#2d73a3] hover:shadow-[0_0_20px_rgba(37,97,139,0.4)] transition-all duration-400"
     >
       View My Work
@@ -60,18 +59,25 @@ const HeroButtons = ({ onNavClick }) => (
 const Hero = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(true);
-  const containerRef = useRef(null);
+  const [isDesktop, setIsDesktop] = useState(false);
   const prefersReduced =
     typeof window !== "undefined"
       ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
       : false;
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
-    const handler = (e) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const mqMobile = window.matchMedia("(max-width: 767px)");
+    const mqDesktop = window.matchMedia("(min-width: 1024px)");
+    setIsMobile(mqMobile.matches);
+    setIsDesktop(mqDesktop.matches);
+    const mobileHandler = (e) => setIsMobile(e.matches);
+    const desktopHandler = (e) => setIsDesktop(e.matches);
+    mqMobile.addEventListener("change", mobileHandler);
+    mqDesktop.addEventListener("change", desktopHandler);
+    return () => {
+      mqMobile.removeEventListener("change", mobileHandler);
+      mqDesktop.removeEventListener("change", desktopHandler);
+    };
   }, []);
 
   useEffect(() => {
@@ -81,54 +87,38 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Use document scroll for animations instead of container scroll
   const { scrollYProgress } = useScroll({
-    target: isMobile ? null : containerRef,
+    target: isDesktop ? undefined : null, // undefined = document scroll
     offset: ["start start", "end start"],
   });
 
-  const nameY = useTransform(scrollYProgress, [0, 0.5], [0, -120]);
-  const nameScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.75]);
+  const nameY = useTransform(scrollYProgress, [0, 0.5], [0, -80]);
+  const nameScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.85]);
   const nameOpacity = useTransform(scrollYProgress, [0.3, 0.55], [1, 0]);
   const roleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const roleY = useTransform(scrollYProgress, [0, 0.3], [0, -40]);
-  const summaryOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const summaryY = useTransform(scrollYProgress, [0, 0.25], [0, -30]);
-  const buttonsOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const buttonsY = useTransform(scrollYProgress, [0, 0.2], [0, -20]);
-  const visualY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const visualScale = useTransform(scrollYProgress, [0, 0.6], [1, 1.15]);
+  const roleY = useTransform(scrollYProgress, [0, 0.3], [0, -30]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.25], [0, -20]);
+  const visualY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const visualScale = useTransform(scrollYProgress, [0, 0.6], [1, 1.1]);
   const visualOpacity = useTransform(scrollYProgress, [0.4, 0.7], [1, 0]);
-  const gradientOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7], [0.6, 1, 0.3]);
-  const gradientX = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const gradientY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  };
 
   if (prefersReduced) {
     return (
-      <section className="sm:pl-16 pl-6 pt-28 pb-12" id="hero" aria-label="Hero">
-        <div className={`${styles.innerWidth} mx-auto flex flex-col`}>
-          <div className="flex justify-center items-center flex-col relative z-10">
-            <h1 className={styles.heroHeading}>VARUN</h1>
-            <h1 className={styles.heroHeading}>RATHOD</h1>
-            <p className="mt-6 font-normal sm:text-[24px] text-[18px] text-secondary-white text-center">
-              {profile.rotatingRoles[0]}
-            </p>
-            <p className="mt-4 font-normal sm:text-[18px] text-[14px] text-secondary-white text-center max-w-[600px] px-4">
-              {profile.summary}
-            </p>
-            <HeroButtons onNavClick={handleNavClick} />
-          </div>
+      <section className="min-h-screen flex flex-col justify-center pt-28 pb-12 px-5 sm:px-16" id="hero" aria-label="Hero">
+        <div className={`${styles.innerWidth} mx-auto flex flex-col items-center text-center`}>
+          <h1 className={styles.heroHeading}>VARUN</h1>
+          <h1 className={styles.heroHeading}>RATHOD</h1>
+          <p className="mt-6 font-normal sm:text-[24px] text-[18px] text-secondary-white text-center">
+            {profile.rotatingRoles[0]}
+          </p>
+          <p className="mt-4 font-normal sm:text-[18px] text-[14px] text-secondary-white text-center max-w-[600px] px-4">
+            {profile.summary}
+          </p>
+          <HeroButtons />
           <div className="relative w-full mt-6">
-            <div className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[100px]" />
+            <div className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[60px] opacity-50" />
             <CodeTerminal />
           </div>
         </div>
@@ -153,7 +143,7 @@ const Hero = () => {
 
   if (isMobile) {
     return (
-      <section className="min-h-screen flex flex-col justify-center pt-24 pb-12 px-5" id="hero" aria-label="Hero">
+      <section className="min-h-[90vh] min-h-[90dvh] flex flex-col justify-center pt-24 pb-12 px-5" id="hero" aria-label="Hero">
         <div className={`${styles.innerWidth} mx-auto flex flex-col items-center text-center`}>
           <h1 className={styles.heroHeading}>VARUN</h1>
           <h1 className={styles.heroHeading}>RATHOD</h1>
@@ -161,9 +151,9 @@ const Hero = () => {
           <p className="mt-4 font-normal text-[14px] text-secondary-white max-w-[600px] px-4">
             {profile.summary}
           </p>
-          <HeroButtons onNavClick={handleNavClick} />
+          <HeroButtons />
           <div className="relative w-full mt-8">
-            <div className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[100px]" />
+            <div className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[60px] opacity-50" />
             <CodeTerminal />
           </div>
         </div>
@@ -172,44 +162,39 @@ const Hero = () => {
   }
 
   return (
-    <section ref={containerRef} className="relative h-[180vh]" id="hero" aria-label="Hero">
-      <div className="sticky top-0 h-screen">
-        <div className="pt-28 pb-8 sm:pl-16 pl-6 h-full flex flex-col justify-center">
-          <div className={`${styles.innerWidth} mx-auto flex flex-col relative`}>
-            <motion.div
-              style={{ y: nameY, scale: nameScale, opacity: nameOpacity, willChange: "transform" }}
-              className="flex justify-center items-center flex-col relative z-10"
-            >
-              <h1 className={styles.heroHeading}>VARUN</h1>
-              <h1 className={styles.heroHeading}>RATHOD</h1>
-            </motion.div>
+    <section className="relative min-h-screen" id="hero" aria-label="Hero">
+      <div className="pt-28 pb-8 sm:pl-16 pl-6 flex flex-col justify-center min-h-screen">
+        <div className={`${styles.innerWidth} mx-auto flex flex-col relative`}>
+          <motion.div
+            style={{ y: nameY, scale: nameScale, opacity: nameOpacity, willChange: "transform, opacity" }}
+            className="flex justify-center items-center flex-col relative z-10"
+          >
+            <h1 className={styles.heroHeading}>VARUN</h1>
+            <h1 className={styles.heroHeading}>RATHOD</h1>
+          </motion.div>
 
-            <motion.div style={{ opacity: roleOpacity, y: roleY }} className="mt-6 h-[40px] flex items-center justify-center relative z-10">
-              {RoleText}
-            </motion.div>
+          <motion.div style={{ opacity: roleOpacity, y: roleY }} className="mt-6 h-[40px] flex items-center justify-center relative z-10">
+            {RoleText}
+          </motion.div>
 
-            <motion.p
-              style={{ opacity: summaryOpacity, y: summaryY }}
-              className="mt-4 font-normal sm:text-[18px] text-[14px] text-secondary-white text-center max-w-[600px] px-4 relative z-10 mx-auto"
-            >
-              {profile.summary}
-            </motion.p>
+          <motion.p
+            style={{ opacity: contentOpacity, y: contentY }}
+            className="mt-4 font-normal sm:text-[18px] text-[14px] text-secondary-white text-center max-w-[600px] px-4 relative z-10 mx-auto"
+          >
+            {profile.summary}
+          </motion.p>
 
-            <motion.div style={{ opacity: buttonsOpacity, y: buttonsY }} className="mt-8 flex gap-4 flex-wrap justify-center px-4 relative z-10">
-              <HeroButtons onNavClick={handleNavClick} />
-            </motion.div>
+          <motion.div style={{ opacity: contentOpacity, y: contentY }} className="mt-8 flex gap-4 flex-wrap justify-center px-4 relative z-10">
+            <HeroButtons />
+          </motion.div>
 
-            <motion.div
-              style={{ y: visualY, scale: visualScale, opacity: visualOpacity, willChange: "transform" }}
-              className="relative w-full mt-6"
-            >
-              <motion.div
-                style={{ opacity: gradientOpacity, x: gradientX, y: gradientY, willChange: "transform" }}
-                className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[100px]"
-              />
-              <CodeTerminal />
-            </motion.div>
-          </div>
+          <motion.div
+            style={{ y: visualY, scale: visualScale, opacity: visualOpacity, willChange: "transform, opacity" }}
+            className="relative w-full mt-6"
+          >
+            <div className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[60px] opacity-60" />
+            <CodeTerminal />
+          </motion.div>
         </div>
       </div>
     </section>

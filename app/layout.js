@@ -1,15 +1,15 @@
 import "../styles/globals.css";
+import "../styles/fonts.css";
 import ClientLayout from "./ClientLayout";
 
 const RootLayout = ({ children }) => (
   <html lang="en">
     <head>
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-      <link rel="preconnect" href="https://stijndv.com" />
-      <link
-        rel="stylesheet"
-        href="https://stijndv.com/fonts/Eudoxus-Sans.css"
-      />
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/EudoxusSans-Regular.woff2" crossOrigin="anonymous" />
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/EudoxusSans-Medium.woff2" crossOrigin="anonymous" />
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/EudoxusSans-Bold.woff2" crossOrigin="anonymous" />
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/EudoxusSans-ExtraBold.woff2" crossOrigin="anonymous" />
       <title>Varun Rathod — Developer Portfolio</title>
       <meta
         name="description"

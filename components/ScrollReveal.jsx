@@ -6,8 +6,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const ScrollReveal = ({
   children,
   direction = "up",
-  distance = 60,
-  duration = 1,
+  distance = 40,
+  duration = 0.7,
   delay = 0,
   className = "",
 }) => {
@@ -23,8 +23,8 @@ const ScrollReveal = ({
   }, []);
 
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.9", "start 0.3"],
+    target: isMobile ? null : ref,
+    offset: ["start 0.85", "start 0.35"],
   });
 
   const transforms = (() => {
@@ -51,7 +51,7 @@ const ScrollReveal = ({
         };
       case "scale":
         return {
-          scale: useTransform(scrollYProgress, [0, 1], [0.9, 1]),
+          scale: useTransform(scrollYProgress, [0, 1], [0.95, 1]),
           opacity: useTransform(scrollYProgress, [0, 1], [0, 1]),
         };
       default:
@@ -62,10 +62,25 @@ const ScrollReveal = ({
     }
   })();
 
+  if (isMobile) {
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       ref={ref}
-      style={isMobile ? {} : transforms}
+      style={transforms}
       className={className}
     >
       {children}
