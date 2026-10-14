@@ -2,16 +2,19 @@ import pluginReact from "eslint-plugin-react";
 
 export default [
   {
+    ignores: ["out/**", ".next/**", "node_modules/**", "dist/**", ".vercel/**"],
+  },
+  {
     files: ["**/*.{js,jsx}"],
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: "module",
-      ecmaFeatures: {
-        jsx: true,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
       globals: {
-        browser: true,
-        es2021: true,
         React: "writable",
       },
     },

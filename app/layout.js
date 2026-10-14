@@ -2,6 +2,12 @@ import "../styles/globals.css";
 import "../styles/fonts.css";
 import ClientLayout from "./ClientLayout";
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 const RootLayout = ({ children }) => (
   <html lang="en">
     <head>
@@ -15,8 +21,8 @@ const RootLayout = ({ children }) => (
         name="description"
         content="Portfolio of Varun Rathod — Software Developer, Full-Stack Builder, and Computer Programming & Analysis student at Algonquin College."
       />
-      <meta name="author" content="Varun Rathod" />
       <meta name="theme-color" content="#1A232E" />
+      <meta name="author" content="Varun Rathod" />
       <meta
         property="og:title"
         content="Varun Rathod — Developer Portfolio"

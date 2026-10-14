@@ -1,10 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef } from "react";
-
-const LenisContext = createContext(null);
-
-export const useLenis = () => useContext(LenisContext);
+import { useEffect } from "react";
 
 const SmoothScrollProvider = ({ children }) => {
   // Native smooth scroll for anchor links only
@@ -30,7 +26,7 @@ const SmoothScrollProvider = ({ children }) => {
     return () => document.removeEventListener("click", handleAnchorClick);
   }, []);
 
-  return <LenisContext.Provider value={null}>{children}</LenisContext.Provider>;
+  return children;
 };
 
 export default SmoothScrollProvider;

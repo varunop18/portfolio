@@ -16,15 +16,12 @@ html {
   margin: 0;
   padding: 0;
   scroll-padding-top: 80px;
-  scroll-behavior: smooth;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  background-color: #1a232e;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -150,7 +147,7 @@ button:hover {
 
 .footer-gradient {
   position: absolute;
-  width: 500px;
+  width: min(500px, 63%);
   height: 100px;
   left: 37%;
   bottom: 0;
@@ -232,20 +229,7 @@ button:hover {
   }
 }
 
-.parallax-layer {
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
 @media (max-width: 767px) {
-  html {
-    -webkit-overflow-scrolling: touch;
-  }
-
-  body {
-    -webkit-overflow-scrolling: touch;
-  }
-
   * {
     -webkit-tap-highlight-color: transparent;
   }

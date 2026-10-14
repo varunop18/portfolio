@@ -7,16 +7,18 @@ import styles from "../styles";
 import { footerVariants } from "../utils/motion";
 
 const Footer = () => (
-  <motion.footer
-    variants={footerVariants}
-    initial="hidden"
-    whileInView="show"
-    className={`${styles.paddings} py-8 relative safe-area-bottom`}
+  <footer
+    className={`${styles.paddings} py-8 relative`}
     aria-label="Footer"
   >
     <div className="footer-gradient" />
 
-    <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
+    <motion.div
+      variants={footerVariants}
+      initial="hidden"
+      whileInView="show"
+      className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}
+    >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
         <div>
           <h4 className="font-bold text-[clamp(28px,4vw,48px)] text-white">
@@ -26,7 +28,7 @@ const Footer = () => (
             <a href={`mailto:${profile.email}`} className="hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black rounded">{profile.email}</a>
           </p>
           <p className="mt-1 font-normal text-[clamp(14px,2vw,16px)] text-secondary-white">
-            <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black rounded">{profile.phone}</a> · {profile.location}
+            <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black rounded">{profile.phone}</a> · {profile.location}
           </p>
         </div>
 
@@ -73,8 +75,8 @@ const Footer = () => (
           </div>
         </div>
       </div>
-    </div>
-  </motion.footer>
+    </motion.div>
+  </footer>
 );
 
 export default Footer;

@@ -21,7 +21,7 @@ const CodeTerminal = () => (
         <span className="ml-3 text-[11px] text-[rgba(255,255,255,0.25)] font-mono">varun@dev ~ </span>
       </div>
       <div className="p-4 sm:p-5 font-mono text-[11px] sm:text-[12px] leading-[20px] sm:leading-[22px]">
-        <p><span className="text-[#c792ea]">const</span> <span className="text-[#82aaff]">developer</span> <span className="text-[#89ddff]">=</span> <span className="text-[#89ddff]">{`{`}</span></p>
+        <p><span className="text-[#c792ea]">const</span> <span className="text-[#82aaff]">developer</span> <span className="text-[#89ddff]">=</span> <span className="text-[#89ddff]">{"{"}</span></p>
         <p className="pl-4"><span className="text-[#c3e88d]">name</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">"Varun Rathod"</span><span className="text-[#89ddff]">,</span></p>
         <p className="pl-4"><span className="text-[#c3e88d]">role</span><span className="text-[#89ddff]">:</span> <span className="text-[#c3e88d]">"Full-Stack Developer"</span><span className="text-[#89ddff]">,</span></p>
         <p className="pl-4"><span className="text-[#c3e88d]">stack</span><span className="text-[#89ddff]">:</span> <span className="text-[#89ddff]">[</span></p>
@@ -29,7 +29,7 @@ const CodeTerminal = () => (
         <p className="pl-8"><span className="text-[#c3e88d]">"Java"</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">"Django"</span><span className="text-[#89ddff]">,</span> <span className="text-[#c3e88d]">"PostgreSQL"</span></p>
         <p className="pl-4"><span className="text-[#89ddff]">]</span><span className="text-[#89ddff]">,</span></p>
         <p className="pl-4"><span className="text-[#c3e88d]">status</span><span className="text-[#89ddff]">:</span> <span className="text-[#ffcb6b]">"Open to opportunities"</span></p>
-        <p><span className="text-[#89ddff]">{`}`}</span><span className="text-[#89ddff]">;</span></p>
+        <p><span className="text-[#89ddff]">{"}"}</span><span className="text-[#89ddff]">;</span></p>
         <p className="mt-2"><span className="text-[#546e7a]">{"// Let's build something great together"}</span></p>
         <p className="mt-1"><span className="text-[#c792ea]">export default</span> <span className="text-[#82aaff]">developer</span><span className="text-[#89ddff]">;</span><span className="inline-block w-[6px] h-[14px] bg-[#82aaff] ml-1 animate-pulse" /></p>
       </div>
@@ -56,40 +56,39 @@ const HeroButtons = () => (
   </div>
 );
 
-const Hero = () => {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(true);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const prefersReduced =
-    typeof window !== "undefined"
-      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      : false;
+const StaticHero = ({ roleIndex }) => (
+  <section className="min-h-[90dvh] flex flex-col justify-center pt-24 pb-12 px-5" id="hero" aria-label="Hero">
+    <div className={`${styles.innerWidth} mx-auto flex flex-col items-center text-center`}>
+      <h1 className={styles.heroHeading}>VARUN</h1>
+      <h1 className={styles.heroHeading}>RATHOD</h1>
+      <div className="mt-6 h-[40px] flex items-center justify-center">
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={roleIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="font-normal text-[18px] text-secondary-white text-center"
+          >
+            {profile.rotatingRoles[roleIndex]}
+          </motion.p>
+        </AnimatePresence>
+      </div>
+      <p className="mt-4 font-normal text-[14px] text-secondary-white max-w-[600px] px-4">
+        {profile.summary}
+      </p>
+      <HeroButtons />
+      <div className="relative w-full mt-8">
+        <div className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[60px] opacity-50" />
+        <CodeTerminal />
+      </div>
+    </div>
+  </section>
+);
 
-  useEffect(() => {
-    const mqMobile = window.matchMedia("(max-width: 767px)");
-    const mqDesktop = window.matchMedia("(min-width: 1024px)");
-    setIsMobile(mqMobile.matches);
-    setIsDesktop(mqDesktop.matches);
-    const mobileHandler = (e) => setIsMobile(e.matches);
-    const desktopHandler = (e) => setIsDesktop(e.matches);
-    mqMobile.addEventListener("change", mobileHandler);
-    mqDesktop.addEventListener("change", desktopHandler);
-    return () => {
-      mqMobile.removeEventListener("change", mobileHandler);
-      mqDesktop.removeEventListener("change", desktopHandler);
-    };
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % profile.rotatingRoles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Use document scroll for animations instead of container scroll
+const DesktopHero = ({ roleIndex }) => {
   const { scrollYProgress } = useScroll({
-    target: isDesktop ? undefined : null, // undefined = document scroll
     offset: ["start start", "end start"],
   });
 
@@ -104,63 +103,6 @@ const Hero = () => {
   const visualScale = useTransform(scrollYProgress, [0, 0.6], [1, 1.1]);
   const visualOpacity = useTransform(scrollYProgress, [0.4, 0.7], [1, 0]);
 
-  if (prefersReduced) {
-    return (
-      <section className="min-h-screen flex flex-col justify-center pt-28 pb-12 px-5 sm:px-16" id="hero" aria-label="Hero">
-        <div className={`${styles.innerWidth} mx-auto flex flex-col items-center text-center`}>
-          <h1 className={styles.heroHeading}>VARUN</h1>
-          <h1 className={styles.heroHeading}>RATHOD</h1>
-          <p className="mt-6 font-normal sm:text-[24px] text-[18px] text-secondary-white text-center">
-            {profile.rotatingRoles[0]}
-          </p>
-          <p className="mt-4 font-normal sm:text-[18px] text-[14px] text-secondary-white text-center max-w-[600px] px-4">
-            {profile.summary}
-          </p>
-          <HeroButtons />
-          <div className="relative w-full mt-6">
-            <div className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[60px] opacity-50" />
-            <CodeTerminal />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  const RoleText = (
-    <AnimatePresence mode="wait">
-      <motion.p
-        key={roleIndex}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.5 }}
-        className="font-normal sm:text-[24px] text-[18px] text-secondary-white text-center"
-      >
-        {profile.rotatingRoles[roleIndex]}
-      </motion.p>
-    </AnimatePresence>
-  );
-
-  if (isMobile) {
-    return (
-      <section className="min-h-[90vh] min-h-[90dvh] flex flex-col justify-center pt-24 pb-12 px-5" id="hero" aria-label="Hero">
-        <div className={`${styles.innerWidth} mx-auto flex flex-col items-center text-center`}>
-          <h1 className={styles.heroHeading}>VARUN</h1>
-          <h1 className={styles.heroHeading}>RATHOD</h1>
-          <div className="mt-6 h-[40px] flex items-center justify-center">{RoleText}</div>
-          <p className="mt-4 font-normal text-[14px] text-secondary-white max-w-[600px] px-4">
-            {profile.summary}
-          </p>
-          <HeroButtons />
-          <div className="relative w-full mt-8">
-            <div className="absolute w-[80%] h-[200px] hero-gradient rounded-full z-0 -top-[40px] left-[10%] blur-[60px] opacity-50" />
-            <CodeTerminal />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className="relative min-h-screen" id="hero" aria-label="Hero">
       <div className="pt-28 pb-8 sm:pl-16 pl-6 flex flex-col justify-center min-h-screen">
@@ -174,7 +116,18 @@ const Hero = () => {
           </motion.div>
 
           <motion.div style={{ opacity: roleOpacity, y: roleY }} className="mt-6 h-[40px] flex items-center justify-center relative z-10">
-            {RoleText}
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={roleIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="font-normal sm:text-[24px] text-[18px] text-secondary-white text-center"
+              >
+                {profile.rotatingRoles[roleIndex]}
+              </motion.p>
+            </AnimatePresence>
           </motion.div>
 
           <motion.p
@@ -199,6 +152,32 @@ const Hero = () => {
       </div>
     </section>
   );
+};
+
+const Hero = () => {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [mode, setMode] = useState("static");
+
+  useEffect(() => {
+    const mqDesktop = window.matchMedia("(min-width: 1024px)");
+    const update = () => setMode(mqDesktop.matches ? "desktop" : "static");
+    update();
+    mqDesktop.addEventListener("change", update);
+    return () => mqDesktop.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % profile.rotatingRoles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (mode === "desktop") {
+    return <DesktopHero roleIndex={roleIndex} />;
+  }
+
+  return <StaticHero roleIndex={roleIndex} />;
 };
 
 export default Hero;

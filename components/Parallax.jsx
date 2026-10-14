@@ -4,33 +4,28 @@ import { useRef, useEffect, useState } from "react";
 
 const Parallax = ({ children, speed = 0.3, className = "" }) => {
   const ref = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
-    const handler = (e) => setIsMobile(e.matches);
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setEnabled(mq.matches);
+    const handler = (e) => setEnabled(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  // Desktop: use a simple scroll-based transform via requestAnimationFrame
   useEffect(() => {
-    if (isMobile || !ref.current) return;
-    
+    if (!enabled || !ref.current) return;
+
     let ticking = false;
     const element = ref.current;
-    
+
     const updatePosition = () => {
       const rect = element.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const elementHeight = rect.height;
-      
-      // Calculate how far the element has scrolled into/out of view
       const progress = Math.max(0, Math.min(1, 1 - rect.top / (viewportHeight + elementHeight)));
-      
-      // Apply transform
-      const offset = speed * 50 * (progress * 2 - 1); // -50 to 50 * speed
+      const offset = speed * 50 * (progress * 2 - 1);
       element.style.transform = `translateY(${offset}px)`;
       ticking = false;
     };
@@ -43,13 +38,13 @@ const Parallax = ({ children, speed = 0.3, className = "" }) => {
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    updatePosition(); // Initial position
-    
+    updatePosition();
+
     return () => {
       window.removeEventListener("scroll", onScroll);
       element.style.transform = "";
     };
-  }, [speed, isMobile]);
+  }, [speed, enabled]);
 
   return (
     <div ref={ref} className={className}>

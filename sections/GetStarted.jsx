@@ -9,24 +9,32 @@ import { profile } from "../constants";
 
 const contactSteps = [
   {
-    number: 1,
-    text: `Send me an email at ${profile.email}`,
+    number: "01",
+    label: "Send me an Email",
+    detail: profile.email,
     href: `mailto:${profile.email}`,
+    external: false,
   },
   {
-    number: 2,
-    text: `Call me at ${profile.phone}`,
+    number: "02",
+    label: "Call me directly",
+    detail: profile.phone,
     href: `tel:${profile.phone.replace(/\s/g, "")}`,
+    external: false,
   },
   {
-    number: 3,
-    text: "Connect with me on LinkedIn",
+    number: "03",
+    label: "Connect on LinkedIn",
+    detail: "linkedin.com/in/varun-rathod-va",
     href: profile.linkedin,
+    external: true,
   },
   {
-    number: 4,
-    text: "Check out my work on GitHub",
+    number: "04",
+    label: "Check out my GitHub",
+    detail: "github.com/varunop18",
     href: profile.github,
+    external: true,
   },
 ];
 
@@ -44,18 +52,28 @@ const Contact = () => (
         title={<>Let&apos;s Build Something Great Together</>}
         textStyles="text-center"
       />
-      <div className="mt-[50px] flex flex-col max-w-[600px] mx-auto gap-[24px] w-full px-4">
-        {contactSteps.map((step) => (
-          <a
-            key={step.number}
-            href={step.href}
-            target={step.number > 1 ? "_blank" : undefined}
-            rel={step.number > 1 ? "noreferrer noopener" : undefined}
-            className="block hover:opacity-80 transition-opacity"
-          >
-            <StartSteps number={step.number} text={step.text} />
-          </a>
-        ))}
+      <div className="relative mx-auto mt-[50px] w-full max-w-[920px] px-4">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#34acc7] opacity-[0.07] blur-[120px]"
+        />
+        <motion.div
+          variants={fadeIn("up", "tween", 0.15, 0.8)}
+          className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5"
+        >
+          {contactSteps.map((step) => (
+            <a
+              key={step.number}
+              href={step.href}
+              target={step.external ? "_blank" : undefined}
+              rel={step.external ? "noreferrer noopener" : undefined}
+              aria-label={`${step.label}: ${step.detail}`}
+              className="block rounded-[24px]"
+            >
+              <StartSteps number={step.number} label={step.label} detail={step.detail} />
+            </a>
+          ))}
+        </motion.div>
       </div>
     </motion.div>
   </section>

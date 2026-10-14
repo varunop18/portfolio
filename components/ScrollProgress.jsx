@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
-const ScrollProgress = () => {
+const ScrollProgressBar = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -18,6 +19,21 @@ const ScrollProgress = () => {
       <div className="w-full h-full hero-gradient" />
     </motion.div>
   );
+};
+
+const ScrollProgress = () => {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setEnabled(mq.matches);
+    const handler = (e) => setEnabled(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  if (!enabled) return null;
+  return <ScrollProgressBar />;
 };
 
 export default ScrollProgress;
