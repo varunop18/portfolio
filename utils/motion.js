@@ -35,7 +35,7 @@ export const slideIn = (direction, type, delay, duration) => ({
   },
 });
 
-export const staggerContainer = (staggerChildren = 0.15, delayChildren = 0.1) => ({
+export const staggerContainer = (staggerChildren = 0.1, delayChildren = 0.05) => ({
   hidden: {},
   show: {
     transition: {
@@ -93,12 +93,12 @@ export const textVariant2 = {
   },
 };
 
-export const fadeIn = (direction, type, delay = 0, duration = 0.75) => ({
+export const fadeIn = (direction, type, delay = 0, duration = 0.5) => ({
   hidden: {
-    x: direction === "left" ? 60 : direction === "right" ? -60 : 0,
-    y: direction === "up" ? 60 : direction === "down" ? -60 : 0,
+    x: direction === "left" ? 40 : direction === "right" ? -40 : 0,
+    y: direction === "up" ? 30 : direction === "down" ? -30 : 0,
     opacity: 0,
-    filter: "blur(3px)",
+    filter: "blur(2px)",
   },
   show: {
     x: 0,

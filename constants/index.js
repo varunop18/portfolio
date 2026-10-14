@@ -30,16 +30,15 @@ export const education = [
 export const skillGroups = [
   {
     title: "Languages",
-    items: ["Python", "Java", "JavaScript", "C", "C++", "C#", "PHP"],
+    items: ["Python", "Java", "JavaScript", "C", "C++", "C#", "PHP", "HTML", "CSS", "SQL"],
   },
   {
     title: "Web & Databases",
     items: [
-      "HTML",
-      "CSS",
       "Django",
       "React 18",
       "Express.js",
+      "Node.js",
       "PostgreSQL",
       "MySQL",
       "SQL Server",

@@ -28,7 +28,7 @@ const ProjectCard = ({ project, index }) => {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
       whileHover={{
         y: -8,
         transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] },
@@ -121,7 +121,7 @@ const FeaturedProjects = () => {
       <motion.div
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false, amount: 0.25 }}
+        viewport={{ once: true, amount: 0.25 }}
         variants={staggerContainer}
         className={`${styles.innerWidth} mx-auto flex flex-col`}
       >

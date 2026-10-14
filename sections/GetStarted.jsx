@@ -44,7 +44,7 @@ const Contact = () => (
       variants={staggerContainer}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.25 }}
+      viewport={{ once: true, amount: 0.25 }}
       className={`${styles.innerWidth} mx-auto flex flex-col`}
     >
       <TypingText title="| Get In Touch" textStyles="text-center" />
@@ -58,7 +58,7 @@ const Contact = () => (
           className="pointer-events-none absolute left-1/2 top-1/2 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#34acc7] opacity-[0.07] blur-[120px]"
         />
         <motion.div
-          variants={fadeIn("up", "tween", 0.15, 0.8)}
+          variants={fadeIn("up", "tween", 0.05)}
           className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5"
         >
           {contactSteps.map((step) => (

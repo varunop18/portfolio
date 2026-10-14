@@ -210,7 +210,7 @@ const MobileCard = ({ project, index }) => {
 
   return (
     <motion.div
-      variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { delay: index * 0.1, duration: 0.6 } } }}
+      variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { delay: 0, duration: 0.45 } } }}
       layout
       onClick={toggleExpanded}
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleExpanded(); } }}
@@ -314,7 +314,7 @@ const Projects = () => {
         variants={staggerContainer}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false, amount: 0.25 }}
+        viewport={{ once: true, amount: 0.25 }}
         className={`${styles.innerWidth} mx-auto flex flex-col`}
       >
         <TypingText title="| All Projects" textStyles="text-center" />
