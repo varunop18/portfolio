@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import styles from "../styles";
@@ -84,120 +84,68 @@ const LightBeam = ({ glow, isActive }) => {
   );
 };
 
-const DesktopCard = ({ project, index, isActive, onActivate, onKeyDown }) => {
+const DesktopCard = ({ project, index }) => {
+  const [hovered, setHovered] = useState(false);
   const style = cardStyles[index % cardStyles.length];
-  const cardRef = useRef(null);
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      onActivate(index);
-    }
-  };
-
-  const handleFocus = () => onActivate(index);
 
   return (
     <motion.div
-      ref={cardRef}
-      layout
-      animate={{
-        width: isActive ? "420px" : "80px",
-      }}
-      transition={{ type: "spring", stiffness: 180, damping: 22 }}
-      className={`relative rounded-[20px] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-black ${isActive ? "w-[420px]" : "w-[80px]"}`}
-      style={{ minHeight: "440px", flexShrink: 0 }}
-      tabIndex={0}
-      role="button"
-      aria-label={`View ${project.title.split("—")[0].split("–")[0].trim()} details`}
-      aria-expanded={isActive}
-      onKeyDown={handleKeyDown}
-      onFocus={handleFocus}
-      onMouseEnter={() => onActivate(index)}
+      variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } }}
+      whileHover={{ scale: 1.02, y: -6, transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] } }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative flex min-h-[440px] flex-col overflow-hidden rounded-[20px] hover:z-10"
     >
       <div className="absolute inset-0 rounded-[20px]" style={{ background: style.bg }} />
       <div className="absolute inset-0 rounded-[20px]" style={{ background: style.overlay }} />
 
-      <Particles isActive={isActive && style.particles} />
-      <LightBeam glow={style.glow} isActive={isActive} />
+      <Particles isActive={hovered && style.particles} />
+      <LightBeam glow={style.glow} isActive={hovered} />
 
-      <div className="absolute inset-0 rounded-[20px] opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+      <div
+        className="absolute inset-0 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{
           background: `radial-gradient(circle at 50% 80%, ${style.glow}30 0%, transparent 60%)`,
         }}
       />
 
-      <div className="relative h-full flex flex-col justify-end p-5 sm:p-6 z-10">
-        <AnimatePresence mode="wait">
-          {isActive ? (
-            <motion.div
-              key="expanded"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-col gap-3"
+      <div className="relative z-10 flex flex-col gap-3 p-5 sm:p-6">
+        <p className="font-normal text-[11px] uppercase tracking-[2px] text-white/50">
+          {project.date || "Project"}
+        </p>
+        <h3 className="font-bold text-[20px] leading-tight text-white">
+          {project.title.split("—")[0].split("–")[0].trim()}
+        </h3>
+        {project.client && (
+          <p className="font-normal text-[12px] italic text-white/50">{project.client}</p>
+        )}
+        <div className="flex flex-wrap gap-1.5">
+          {project.stack.map((tech) => (
+            <span
+              key={tech}
+              className="px-2.5 py-1 rounded-full bg-white/10 text-white text-[11px] font-medium backdrop-blur-sm border border-white/10"
             >
-              <p className="font-normal text-[11px] uppercase tracking-[2px] text-white/50">
-                {project.date || "Project"}
-              </p>
-              <h3 className="font-bold text-[20px] sm:text-[24px] text-white leading-tight">
-                {project.title.split("—")[0].split("–")[0].trim()}
-              </h3>
-              {project.client && (
-                <p className="font-normal text-[12px] text-white/50 italic">{project.client}</p>
-              )}
-              <div className="flex flex-wrap gap-1.5 mt-1">
-                {project.stack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-1 rounded-full bg-white/10 text-white text-[11px] font-medium backdrop-blur-sm border border-white/10"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <ul className="flex flex-col gap-2 mt-2">
-                {project.bullets.map((bullet, j) => (
-                  <li
-                    key={j}
-                    className="font-normal text-[12px] sm:text-[13px] text-white/75 leading-[18px] flex gap-2"
-                  >
-                    <span className="text-white/40 shrink-0 mt-0.5">▸</span>
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="collapsed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="flex flex-col items-center pb-4"
+              {tech}
+            </span>
+          ))}
+        </div>
+        <ul className="flex flex-col gap-2 mt-1">
+          {project.bullets.map((bullet, j) => (
+            <li
+              key={j}
+              className="font-normal text-[12px] sm:text-[13px] text-white/75 leading-[18px] flex gap-2"
             >
-              <span
-                className="font-bold text-[14px] sm:text-[15px] text-white/90 whitespace-nowrap"
-                style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
-                aria-hidden="true"
-              >
-                {project.title.split("—")[0].split("–")[0].trim()}
-              </span>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <span className="text-white/40 shrink-0 mt-0.5">▸</span>
+              {bullet}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      {isActive && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="absolute inset-0 rounded-[20px] border-2 pointer-events-none z-20"
-          style={{ borderColor: `${style.glow}40` }}
-        />
-      )}
+      <div
+        className="absolute inset-0 rounded-[20px] border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20"
+        style={{ borderColor: `${style.glow}40` }}
+      />
     </motion.div>
   );
 };
@@ -211,7 +159,6 @@ const MobileCard = ({ project, index }) => {
   return (
     <motion.div
       variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { delay: 0, duration: 0.45 } } }}
-      layout
       onClick={toggleExpanded}
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleExpanded(); } }}
       tabIndex={0}
@@ -226,7 +173,7 @@ const MobileCard = ({ project, index }) => {
       <Particles isActive={style.particles} />
       <LightBeam glow={style.glow} isActive={expanded} />
 
-      <motion.div layout="position" className="relative z-10 p-5 flex flex-col gap-2">
+      <div className="relative z-10 p-5 flex flex-col gap-2">
         <p className="font-normal text-[10px] uppercase tracking-[2px] text-white/50">
           {project.date || "Project"}
         </p>
@@ -240,7 +187,7 @@ const MobileCard = ({ project, index }) => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="overflow-hidden flex flex-col gap-2"
             >
               {project.client && (
@@ -287,59 +234,36 @@ const MobileCard = ({ project, index }) => {
         <p className="text-[10px] text-white/30 mt-2">
           {expanded ? "Tap to collapse" : "Tap to expand"}
         </p>
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
 
-const Projects = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [isMobile, setIsMobile] = useState(false);
+const Projects = () => (
+  <section className={`${styles.paddings} relative z-10`} aria-label="All Projects">
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
+      className={`${styles.innerWidth} mx-auto flex flex-col`}
+    >
+      <TypingText title="All Projects" textStyles="text-center" />
+      <TitleText title={<>Projects I&apos;ve Built</>} textStyles="text-center" />
 
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    setIsMobile(mq.matches);
-    const handler = (e) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+      <div className="mt-[50px] hidden lg:grid grid-cols-2 2xl:grid-cols-4 gap-4 px-2">
+        {projects.map((project, i) => (
+          <DesktopCard key={project.id} project={project} index={i} />
+        ))}
+      </div>
 
-  const handleActivate = useCallback((index) => {
-    setActiveIndex(index);
-  }, []);
-
-  return (
-    <section className={`${styles.paddings} relative z-10`} aria-label="All Projects">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        className={`${styles.innerWidth} mx-auto flex flex-col`}
-      >
-        <TypingText title="All Projects" textStyles="text-center" />
-        <TitleText title={<>Projects I&apos;ve Built</>} textStyles="text-center" />
-
-        <div className="mt-[50px] hidden lg:flex gap-3 justify-center px-2" role="tablist" aria-label="Project cards">
-          {projects.map((project, i) => (
-            <DesktopCard
-              key={project.id}
-              project={project}
-              index={i}
-              isActive={activeIndex === i}
-              onActivate={handleActivate}
-            />
-          ))}
-        </div>
-
-        <div className="mt-[30px] grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 lg:hidden">
-          {projects.map((project, i) => (
-            <MobileCard key={project.id} project={project} index={i} />
-          ))}
-        </div>
-      </motion.div>
-    </section>
-  );
-};
+      <div className="mt-[30px] grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 lg:hidden">
+        {projects.map((project, i) => (
+          <MobileCard key={project.id} project={project} index={i} />
+        ))}
+      </div>
+    </motion.div>
+  </section>
+);
 
 export default Projects;

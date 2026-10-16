@@ -101,13 +101,6 @@ const ProjectCard = ({ project, index }) => {
             </li>
           ))}
         </ul>
-
-        <div className="flex items-center gap-2 mt-1 text-white/40 group-hover:text-white/70 transition-colors duration-300">
-          <span className="text-[13px] font-medium">Explore project</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="group-hover:translate-x-1 transition-transform duration-300">
-            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
       </div>
     </motion.div>
   );
