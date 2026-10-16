@@ -125,7 +125,7 @@ const FeaturedProjects = () => {
         variants={staggerContainer}
         className={`${styles.innerWidth} mx-auto flex flex-col`}
       >
-        <TypingText title="| Featured Projects" textStyles="text-center" />
+        <TypingText title="Featured Projects" textStyles="text-center" />
         <TitleText title={<>Projects I&apos;m Proud Of</>} textStyles="text-center" />
         <div className="mt-[50px] grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {featured.map((project, i) => (

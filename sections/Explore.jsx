@@ -16,7 +16,7 @@ const Skills = () => (
       viewport={{ once: true, amount: 0.25 }}
       className={`${styles.innerWidth} mx-auto flex flex-col`}
     >
-      <TypingText title="| Skills Universe" textStyles="text-center" />
+      <TypingText title="Skills Universe" textStyles="text-center" />
       <TitleText
         title={<>Technologies & Tools I Work With</>}
         textStyles="text-center"

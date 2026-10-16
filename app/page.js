@@ -9,7 +9,6 @@ import About from "../sections/About";
 import Explore from "../sections/Explore";
 import WhatsNew from "../sections/WhatsNew";
 import World from "../sections/World";
-import GetStarted from "../sections/GetStarted";
 import Footer from "../components/Footer";
 
 const Page = () => (
@@ -34,9 +33,6 @@ const Page = () => (
         </Parallax>
         <World />
       </div>
-    </SceneTransition>
-    <SceneTransition>
-      <GetStarted />
     </SceneTransition>
     <Footer />
   </div>

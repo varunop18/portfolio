@@ -317,7 +317,7 @@ const Projects = () => {
         viewport={{ once: true, amount: 0.25 }}
         className={`${styles.innerWidth} mx-auto flex flex-col`}
       >
-        <TypingText title="| All Projects" textStyles="text-center" />
+        <TypingText title="All Projects" textStyles="text-center" />
         <TitleText title={<>Projects I&apos;ve Built</>} textStyles="text-center" />
 
         <div className="mt-[50px] hidden lg:flex gap-3 justify-center px-2" role="tablist" aria-label="Project cards">

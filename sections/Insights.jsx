@@ -17,7 +17,7 @@ const Experience = () => (
       viewport={{ once: true, amount: 0.25 }}
       className={`${styles.innerWidth} mx-auto flex flex-col`}
     >
-      <TypingText title="| Experience" textStyles="text-center" />
+      <TypingText title="Experience" textStyles="text-center" />
       <TitleText title="Work History" textStyles="text-center" />
       <div className="mt-[50px] flex flex-col gap-[30px]">
         {experience.map((exp, i) => (

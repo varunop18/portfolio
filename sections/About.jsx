@@ -30,7 +30,7 @@ const About = () => (
       viewport={{ once: true, amount: 0.25 }}
       className={`${styles.innerWidth} mx-auto ${styles.flexCenter} flex-col`}
     >
-      <TypingText title="| About Me" textStyles="text-center" />
+      <TypingText title="About Me" textStyles="text-center" />
 
       <motion.div
         variants={fadeIn("up", "tween", 0.05)}
@@ -62,19 +62,6 @@ const About = () => (
             </div>
           </div>
 
-          <p className="relative font-normal text-[16px] leading-[1.6] text-secondary-white sm:text-[20px] sm:leading-[1.6] md:text-[24px]">
-            <span className="bg-clip-text bg-[linear-gradient(97.86deg,#a509ff_0%,#34acc7_53.65%,#a134c7_100%)] font-extrabold text-transparent">
-              {profile.name}
-            </span>{" "}
-            is a{" "}
-            <span className="font-extrabold text-white">
-              Computer Programming &amp; Analysis
-            </span>{" "}
-            student at{" "}
-            <span className="font-extrabold text-white">Algonquin College</span>{" "}
-            with hands-on experience building full-stack, database-driven, and
-            desktop applications in Python, Java, and the MERN stack.
-          </p>
         </div>
       </motion.div>
 
@@ -130,7 +117,7 @@ const About = () => (
             variants={fadeIn("up", "tween", 0.15 + i * 0.05)}
             className="group flex flex-col items-center rounded-[20px] border border-white/10 bg-white/[0.04] px-2 py-5 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-[#34acc7]/40 hover:shadow-[0_8px_30px_rgba(52,172,199,0.12)] sm:px-4 sm:py-6"
           >
-            <span className="bg-clip-text bg-[linear-gradient(97.86deg,#a509ff_0%,#34acc7_53.65%,#a134c7_100%)] font-extrabold text-[28px] leading-none text-transparent sm:text-[36px]">
+            <span className="font-extrabold text-[28px] leading-none text-white sm:text-[36px]">
               {stat.value}
             </span>
             <span className="mt-2 text-center text-[11px] font-medium text-secondary-white sm:text-[13px]">
