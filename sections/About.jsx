@@ -5,12 +5,7 @@ import { TypingText } from "../components";
 
 import styles from "../styles";
 import { fadeIn, staggerContainer } from "../utils/motion";
-import { profile, education, skillGroups, projects } from "../constants";
-
-const initials = profile.name
-  .split(" ")
-  .map((n) => n[0])
-  .join("");
+import { education, skillGroups, projects } from "../constants";
 
 const languageCount = skillGroups.find((g) => g.title === "Languages").items.length;
 
@@ -31,39 +26,6 @@ const About = () => (
       className={`${styles.innerWidth} mx-auto ${styles.flexCenter} flex-col`}
     >
       <TypingText title="About Me" textStyles="text-center" />
-
-      <motion.div
-        variants={fadeIn("up", "tween", 0.05)}
-        className="relative mt-8 w-full max-w-[800px] px-4"
-      >
-        <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] px-6 py-8 text-center backdrop-blur-sm sm:px-10 sm:py-10">
-          <div
-            aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#34acc7] to-transparent opacity-70"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-14 -top-14 h-44 w-44 rounded-full bg-[#a509ff] opacity-[0.14] blur-[64px]"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-14 -left-14 h-44 w-44 rounded-full bg-[#34acc7] opacity-[0.12] blur-[64px]"
-          />
-
-          <div
-            className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full p-[2px] sm:h-[72px] sm:w-[72px]"
-            style={{
-              backgroundImage: "linear-gradient(97.86deg, #a509ff 0%, #34acc7 53.65%, #a134c7 100%)",
-            }}
-            aria-hidden="true"
-          >
-            <div className="flex h-full w-full items-center justify-center rounded-full bg-[#0c111b] text-[18px] font-extrabold tracking-[1px] text-white sm:text-[20px]">
-              {initials}
-            </div>
-          </div>
-
-        </div>
-      </motion.div>
 
       <motion.div
         variants={fadeIn("up", "tween", 0.1)}
